@@ -13,5 +13,10 @@ describe("Servers test (with setup and tear-down)", function() {
 
   afterEach(function() {
     // teardown logic
+    //https://stackoverflow.com/questions/3455405/how-do-i-remove-a-key-from-a-javascript-object
+    // delete 
+    delete allServers['server' + serverId];
+    updateServerTable()
+
   });
 });
