@@ -24,6 +24,25 @@ function submitServerInfo(evt) {
   }
 }
 
+function appendServerRemove(tr) {
+  const removeButton = document.createElement('button')
+  removeButton.innerText = "remove"
+
+  removeButton.addEventListener('click', function (e) {
+    console.log(String(tr.getAttribute("id")))
+    deleteServerID([String(tr.getAttribute("id"))])
+    updateServerTable()
+  })
+
+  tr.append(removeButton)
+}
+
+function deleteServerID(serverID) {
+  //https://stackoverflow.com/questions/3455405/how-do-i-remove-a-key-from-a-javascript-object
+  // delete 
+  delete allServers[serverID]
+}
+
 // Create table row element and pass to appendTd function with input value
 function updateServerTable() {
   serverTbody.innerHTML = '';
@@ -38,6 +57,7 @@ function updateServerTable() {
 
     appendTd(newTr, curServer.serverName);
     appendTd(newTr, '$' + tipAverage.toFixed(2));
+    appendServerRemove(newTr);
 
     serverTbody.append(newTr);
   }

@@ -1,4 +1,4 @@
-describe("Servers test (with setup and tear-down)", function() {
+describe("Servers test (with setup and tear-down)", function () {
   beforeEach(function () {
     // initialization logic
     serverNameInput.value = 'Alice';
@@ -11,12 +11,16 @@ describe("Servers test (with setup and tear-down)", function() {
     expect(allServers['server' + serverId].serverName).toEqual('Alice');
   });
 
-  afterEach(function() {
-    // teardown logic
-    //https://stackoverflow.com/questions/3455405/how-do-i-remove-a-key-from-a-javascript-object
-    // delete 
-    delete allServers['server' + serverId];
+  it('should delete a server from allServers on deleteServerID()', function () {
+    deleteServerID('server1')
+    console.log(allServers)
+    expect(Object.keys(allServers).length).toEqual(0)
     updateServerTable()
+  })
 
+  afterAll(function () {
+    // teardown logic
+    serverNameInput.value = ''
+    updateServerTable()
   });
 });
